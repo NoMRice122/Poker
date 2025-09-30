@@ -11,6 +11,16 @@ public class Hand {
 
     public Card[] getCards() { return cards; }
 
+    //指定した数字がハンドに含まれるか調べるメソッド
+    public boolean contains(Rank rank){
+        for(int i=0; i<getCards().length; i++){
+            if(cards[i].getRank() == rank){
+                return true;
+            }
+        }
+        return false;
+    }
+
     // 役の判定はここから呼び出すイメージ
     public String getRank() {
         JudgeRank judge = new JudgeRank(this);
