@@ -21,6 +21,17 @@ public class Hand {
         return false;
     }
 
+    //指定した数字がハンドに何枚含まれるか調べるメソッド
+    public int count(Rank rank){
+        int ret=0;
+        for(int i=0; i<getCards().length; i++){
+            if(rank == cards[i].getRank()){
+                ret += 1;
+            }
+        }
+        return ret;
+    }
+
     // 役の判定はここから呼び出すイメージ
     public String getRank() {
         JudgeRank judge = new JudgeRank(this);

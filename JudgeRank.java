@@ -68,7 +68,7 @@ public class JudgeRank {
         return true;
     }
 
-    //ストレート
+    //ストレート(完成)
     public boolean isST(Hand hand){
         //Aが含まれているかどうかで動作を変える
         //Aが含まれている場合:
@@ -127,33 +127,99 @@ public class JudgeRank {
         return true;
     }
 
-    //フォーカード
+    //フォーカード(完成)
     public boolean is4K(Hand hand){
-
+        //1枚目を基準にする
+        Rank criterion = cards[0].getRank();
+        //同じ数字が自分のほかに何枚あるか数える変数
+        int counter = 0;
+        for(int i=1; i<5; i++){
+            if(cards[i].getRank() == criterion){
+                counter += 1;
+            }
+        }
+        //同じ数字が3枚あれば
+        if(counter == 3){
+            return true;
+        }
+        //もし1枚目のカードがフォーカードに関係しないカードだった場合正しく判定できないので
+        //次に2枚目を基準にして同じ検証をする(これでもれなく判定できる)
+        criterion = cards[1].getRank();
+        counter = 0;
+        for(int i=2; i<5; i++){
+            if(cards[i].getRank() == criterion){
+                counter += 1;
+            }
+        }
+        //同じ数字が3枚あれば
+        if(counter == 3){
+            return true;
+        }
         return false;
     }
 
-    //フルハウス
+    //フルハウス(完成)
     public boolean isFH(Hand hand){
-
+        //1枚目を基準にする
+        Rank criterion = cards[0].getRank();
+        //1枚目の数字がFHの2枚組の数字だった場合
+        if(hand.count(criterion) == 2){
+            //3枚組の数字があるか検証する
+            for(int i=1; i<5; i++){
+                if(hand.count(cards[i].getRank()) == 3){
+                    return true;
+                }
+            }
+        }
+        //1枚目の数字がFHの3枚組の数字だった場合
+        if(hand.count(criterion) == 3){
+            //2枚組の数字があるか検証する
+            for(int i=1; i<5; i++){
+                if(hand.count(cards[i].getRank()) == 2){
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
-    //スリーカード
+    //スリーカード(完成)
     public boolean is3K(Hand hand){
-
+        //3枚組の数字があるか調べる
+        //ハンドの3枚目まで調べて3枚組の数字がなかった場合スリーカードはありえないのでi<3にしている
+        for(int i=0; i<3; i++){
+            if(hand.count(cards[i].getRank()) == 3){
+                return true;
+            }
+        }        
         return false;
     }
 
-    //ツーペア
+    //ツーペア(完成)
     public boolean is2P(Hand hand){
+        //ハンドを全て調べてhand.count() == 2が4回出ればツーペアになる
+        //4回出るか数える変数
+        int counter = 0;
+        for(int i=0; i<5; i++){
+            if(hand.count(cards[i].getRank()) == 2){
+                counter += 1;
+            }
+        }
+        if(counter == 4){
+            return true;
+        }
 
         return false;
     }
 
-    //ワンペア
+    //ワンペア(完成)
     public boolean is1P(Hand hand){
-
+        //ハンドの4枚目まで調べてペアがなかった場合ワンペアはありえないのでi<4にしている
+        for(int i=0; i<4; i++){
+            if(hand.count(cards[i].getRank()) == 2){
+                return true;
+            }
+        } 
         return false;
     }
 }

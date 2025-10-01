@@ -210,12 +210,5 @@ public class TestJudgeRank {
         }else{
             System.out.println("結果:x");
         }
-
-
-
-
-
-
-
     }
 }
