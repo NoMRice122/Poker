@@ -129,32 +129,13 @@ public class JudgeRank {
 
     //フォーカード(完成)
     public boolean is4K(Hand hand){
-        //1枚目を基準にする
-        Rank criterion = cards[0].getRank();
-        //同じ数字が自分のほかに何枚あるか数える変数
-        int counter = 0;
-        for(int i=1; i<5; i++){
-            if(cards[i].getRank() == criterion){
-                counter += 1;
+        //4枚組の数字があるか調べる
+        //ハンドの2枚目まで調べて4枚組の数字がなかった場合フォーカードはありえないのでi<2にしている
+        for(int i=0; i<2; i++){
+            if(hand.count(cards[i].getRank()) == 4){
+                return true;
             }
-        }
-        //同じ数字が3枚あれば
-        if(counter == 3){
-            return true;
-        }
-        //もし1枚目のカードがフォーカードに関係しないカードだった場合正しく判定できないので
-        //次に2枚目を基準にして同じ検証をする(これでもれなく判定できる)
-        criterion = cards[1].getRank();
-        counter = 0;
-        for(int i=2; i<5; i++){
-            if(cards[i].getRank() == criterion){
-                counter += 1;
-            }
-        }
-        //同じ数字が3枚あれば
-        if(counter == 3){
-            return true;
-        }
+        }        
         return false;
     }
 
