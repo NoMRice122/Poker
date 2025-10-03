@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Game{
     Scanner sc = new Scanner(System.in);
@@ -23,6 +25,7 @@ public class Game{
         while(invalidInput){
             System.out.print("ベットする金額を入力: ");
             int betAmount = sc.nextInt();
+            sc.nextLine();
             if(0 < betAmount && betAmount <= player.getMoney()){
                 invalidInput = false;
             } else {
@@ -34,6 +37,21 @@ public class Game{
         player.showHand();
 
         System.out.print("交換するカードを入力: ");
+        String input = sc.nextLine();
+        ArrayList<String> changeCards = new ArrayList<>(Arrays.asList(input.split(" ")));
+
+        //交換するカードがある場合
+        if(!changeCards.contains("")){
+            for(int i=0; i<changeCards.size(); i++){
+                dealer.swapCard(player, changeCards.get(i));
+            }
+        }
+
+        player.showHand();
+        
+        
+
+
         
     }
 
