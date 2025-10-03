@@ -127,17 +127,17 @@ public class TestJudgeRank {
         }
 
         //Aを含むストレート
-        System.out.println("Aを含むストレートのテスト<<ca c2 c4 c6 c8>>");
+        System.out.println("Aを含むストレートのテスト<<sa c2 h3 d4 c5>>");
         hand = new Hand(
-            Card.fromString("ca"),
+            Card.fromString("sa"),
             Card.fromString("c2"),
-            Card.fromString("c4"),
-            Card.fromString("c6"),
-            Card.fromString("c8")
+            Card.fromString("h3"),
+            Card.fromString("d4"),
+            Card.fromString("c5")
         );
-        System.out.println("期待値: FL");
+        System.out.println("期待値: ST");
         System.out.println("検出値: " + hand.getRank());
-        if(hand.getRank().equals("FL")){
+        if(hand.getRank().equals("ST")){
             System.out.println("結果:o");
         }else{
             System.out.println("結果:x");

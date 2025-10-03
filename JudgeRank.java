@@ -17,7 +17,6 @@ public class JudgeRank {
      * 最後まで成立しない場合ノーペアとする。
      */
     public String doJudge() {
-        // TODO: 役判定ロジックを実装
         if(isRF(hand)){return "RF";}
         if(isSF(hand)){return "SF";}
         if(is4K(hand)){return "4K";}
