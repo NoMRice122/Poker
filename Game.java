@@ -6,6 +6,7 @@ public class Game{
     Scanner sc = new Scanner(System.in);
     Player player;
     Dealer dealer;
+    CPU cpu;
 
     public void startGame(){
         player = new Player(1000);
@@ -19,6 +20,8 @@ public class Game{
 
     public void playRound(){
         dealer = new Dealer();
+        cpu = new CPU();
+        
         System.out.println("現在の所持金: " + player.getMoney());
 
         boolean invalidInput = true;
@@ -33,6 +36,7 @@ public class Game{
             }
         }
 
+        dealer.dealHand(cpu);
         dealer.dealHand(player);
         player.showHand();
 
@@ -48,6 +52,10 @@ public class Game{
         }
 
         player.showHand();
+        System.out.println("あなたの役: " + player.getHand().getRank());
+
+        cpu.showHand();
+        System.out.println("CPUの役: " + cpu.getHand().getRank());
         
         
 
