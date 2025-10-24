@@ -7,6 +7,7 @@ public class Game{
     Player player;
     Dealer dealer;
     CPU cpu;
+    JudgeWinner judgeWinner;
 
     public void startGame(){
         player = new Player(1000);
@@ -21,6 +22,7 @@ public class Game{
     public void playRound(){
         dealer = new Dealer();
         cpu = new CPU();
+        judgeWinner = new JudgeWinner();
         
         System.out.println("現在の所持金: " + player.getMoney());
 
@@ -29,6 +31,8 @@ public class Game{
             System.out.print("ベットする金額を入力: ");
             int betAmount = sc.nextInt();
             sc.nextLine();
+            //ベットする金額を所持金から引く
+            player.decreaseMoney(betAmount);
             if(0 < betAmount && betAmount <= player.getMoney()){
                 invalidInput = false;
             } else {
@@ -51,11 +55,31 @@ public class Game{
             }
         }
 
+        //役を表示
         player.showHand();
         System.out.println("あなたの役: " + player.getHand().getRank());
 
         cpu.showHand();
         System.out.println("CPUの役: " + cpu.getHand().getRank());
+
+        //勝敗判定の結果を表示してマネー関係の処理をする
+        switch(judgeWinner.doJudge(player.getHand(), cpu.getHand())){
+            //プレイヤーの勝利
+            case 1: 
+                System.out.println("プレイヤーの勝利！");
+                break;
+            //CPUの勝利
+            case -1:
+                System.out.println("CPUの勝利！");
+                break;
+            //引き分け
+            case 0:
+                System.out.println("引き分け！");
+                break;
+            case 999:
+                System.out.println("エラー: Game.java:80");
+                break;
+        }
         
         
 

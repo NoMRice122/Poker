@@ -26,6 +26,11 @@ public class Player{
         this.hand = hand;
     }
 
+    //ベットした金額だけ所持金を減らす
+    public void decreaseMoney(int betAmount){
+        this.money -= betAmount;
+    }
+
     //あなたの手札<<a b c d e>>などと表示する
     public void showHand(){
         String text = "";
