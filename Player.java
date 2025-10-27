@@ -21,6 +21,10 @@ public class Player{
         return this.alive;
     }
 
+    public void setAlive(boolean alive){
+        this.alive = alive;
+    }
+
     //ハンドを設定する
     public void setHand(Hand hand){
         this.hand = hand;
@@ -29,6 +33,10 @@ public class Player{
     //ベットした金額だけ所持金を減らす
     public void decreaseMoney(int betAmount){
         this.money -= betAmount;
+    }
+
+    public void giveMoney(int money){
+        this.money += money;
     }
 
     //あなたの手札<<a b c d e>>などと表示する
